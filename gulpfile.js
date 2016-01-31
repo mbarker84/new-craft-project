@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
+<<<<<<< HEAD
 var plumber = require('gulp-plumber');
 var notify = require('gulp-notify');
 var browserSync = require('browser-sync');
@@ -48,3 +49,21 @@ gulp.task('default', ['watch'], function () {
 		}))
 		.pipe(gulp.dest('dist'));
 });
+=======
+
+gulp.task('hello', function() {
+  console.log('Hello');
+});
+
+gulp.task('sass', function(){
+  return gulp.src('app/scss/**/*.scss')
+    .pipe(sass())
+    .pipe(gulp.dest('app/css'))
+});
+
+gulp.task('watch', function(){
+  gulp.watch('app/scss/**/*.scss', ['sass']);
+})
+
+gulp.task('default', ['watch', 'sass', 'hello']);
+>>>>>>> aa92a94441653fc86386f42fbc7c474fd099b52d
