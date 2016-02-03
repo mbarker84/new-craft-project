@@ -1,10 +1,10 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
-<<<<<<< HEAD
 var plumber = require('gulp-plumber');
 var notify = require('gulp-notify');
 var browserSync = require('browser-sync');
 var autoprefixer = require('gulp-autoprefixer');
+var jade = require('gulp-jade');
 
 
 function customPlumber () { 
@@ -36,7 +36,7 @@ gulp.task('browserSync', function() {
 })
 
 
-gulp.task('watch', ['browserSync', 'sass'], function() {
+gulp.task('watch', ['browserSync', 'jade', 'sass'], function() {
   gulp.watch('public/app/scss/**/*.scss', ['sass']);
 })
 
@@ -49,11 +49,6 @@ gulp.task('default', ['watch'], function () {
 		}))
 		.pipe(gulp.dest('dist'));
 });
-=======
-
-gulp.task('hello', function() {
-  console.log('Hello');
-});
 
 gulp.task('sass', function(){
   return gulp.src('app/scss/**/*.scss')
@@ -61,9 +56,12 @@ gulp.task('sass', function(){
     .pipe(gulp.dest('app/css'))
 });
 
-gulp.task('watch', function(){
-  gulp.watch('app/scss/**/*.scss', ['sass']);
-})
 
-gulp.task('default', ['watch', 'sass', 'hello']);
->>>>>>> aa92a94441653fc86386f42fbc7c474fd099b52d
+gulp.task('jade', function() {
+ 
+  gulp.src('public/app/*.jade')
+    .pipe(jade())
+    .pipe(gulp.dest('app/templates'))
+});
+
+gulp.task('default', ['watch']);
