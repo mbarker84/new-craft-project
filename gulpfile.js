@@ -56,11 +56,25 @@ gulp.task('browserSync', function() {
 });
 
 
-gulp.task('default', ['watch', 'sass', 'jade'], function () {
+gulp.task('default', ['watch', 'sass', 'jade'], function() {
     return gulp.src('public/app/styles.css')
 		.pipe(autoprefixer({
 			browsers: ['last 2 versions'],
 			cascade: false
 		}))
-		.pipe(gulp.dest('tmp'));
+		.pipe(gulp.dest('public/tmp/css'));
 });
+
+
+// Build task – to execute site ready to deploy
+gulp.task('build-templates', function() {
+    return gulp.src('public/tmp/templates/*/**.html')
+        .pipe(gulp.dest('public/deploy/templates'));
+});
+
+gulp.task('build-css', function() {
+    return gulp.src('public/tmp/css/styles.css')
+        .pipe(gulp.dest('public/deploy/css'));
+});
+
+gulp.task('build', ['build-templates', 'build-css'], function() {});

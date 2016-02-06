@@ -353,5 +353,5 @@ td,
 th {
   padding: 0; }
 
-html, body, * {
-  font-family: "Helvetica", sans-serif; }
+body {
+  background-color: red !important; }
