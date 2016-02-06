@@ -7,18 +7,38 @@ var autoprefixer = require('gulp-autoprefixer');
 var jade = require('gulp-jade');
 
 
-function customPlumber () { 
+function customPlumber() { 
     return plumber({
         errorHandler: notify.onError("Error: <%= error.message %>")
     });
 }
+
+
+gulp.task('watch', ['browserSync'], function() {
+    gulp.watch('public/app/scss/**/*.scss', ['sass']);
+    gulp.watch('public/app/jade/**/*.jade', ['jade']);
+});
+
 
 gulp.task('sass', function() {
   return gulp.src('public/app/scss/**/*.scss')
     // Checks for errors all plugins
     .pipe(customPlumber('Error running Sass'))
     .pipe(sass())
-    .pipe(gulp.dest('public/app/css'))
+    .pipe(gulp.dest('public/tmp/css'))
+    // Tells Browser Sync to reload files task is done
+    .pipe(browserSync.reload({
+        stream: true
+    }))
+});
+
+
+gulp.task('jade', function() {
+  return gulp.src('public/app/jade/**/*.jade')
+    // Checks for errors all plugins
+    .pipe(customPlumber('Error running Jade'))
+    .pipe(jade())
+    .pipe(gulp.dest('public/tmp/templates'))
     // Tells Browser Sync to reload files task is done
     .pipe(browserSync.reload({
         stream: true
@@ -33,35 +53,14 @@ gulp.task('browserSync', function() {
         notify: false,
         open: 'localhost:3000/new-craft-project/public/'
     })
-})
+});
 
 
-gulp.task('watch', ['browserSync', 'jade', 'sass'], function() {
-  gulp.watch('public/app/scss/**/*.scss', ['sass']);
-})
-
-
-gulp.task('default', ['watch'], function () {
+gulp.task('default', ['watch', 'sass', 'jade'], function () {
     return gulp.src('public/app/styles.css')
 		.pipe(autoprefixer({
 			browsers: ['last 2 versions'],
 			cascade: false
 		}))
-		.pipe(gulp.dest('dist'));
+		.pipe(gulp.dest('tmp'));
 });
-
-gulp.task('sass', function(){
-  return gulp.src('app/scss/**/*.scss')
-    .pipe(sass())
-    .pipe(gulp.dest('app/css'))
-});
-
-
-gulp.task('jade', function() {
- 
-  gulp.src('public/app/*.jade')
-    .pipe(jade())
-    .pipe(gulp.dest('app/templates'))
-});
-
-gulp.task('default', ['watch']);
