@@ -355,3 +355,7 @@ th {
 
 html, body, * {
   font-family: "Helvetica", sans-serif; }
+
+.site-header {
+  font-size: 5em;
+  background-color: yellow; }

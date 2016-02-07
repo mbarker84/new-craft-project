@@ -1,0 +1,13 @@
+<main id="content" role="main" class="main">
+    {% block content %}
+    <ul class="posts">
+        {% for entry in craft.entries.section('news').limit(5).find() %}
+        <li class="posts__item">
+            <h2 class="post__title"><a href="{{ entry.url }}">{{ entry.title }}</a></h2>
+            <p>{{ entry.body }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+    
+    {% endblock %}
+</main>
