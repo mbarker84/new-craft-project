@@ -50,6 +50,7 @@
 <body>
 	<div id="container">
         {% include "_header" %}
+        <main id="content" role="main" class="main">
         
         {% block content %}
         
@@ -57,7 +58,9 @@
         
         {% endblock %}
         
-
+        </main>
+        
+        {% include "_sidebar" %}
 		<footer id="footer">
 			Copyright {{ now.year }} {{ craft.request.serverName | ucfirst }}. All rights reserved  •  Built with <a href="http://craftcms.com">Craft</a>
 		</footer>

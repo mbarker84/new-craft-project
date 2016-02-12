@@ -1,0 +1,17 @@
+{% extends "_layout" %}
+
+{% block content %}
+	<ul class="posts">
+        {% if tag is defined %}
+            {% set tagId = craft.tags.name(gameTags).first() %}
+                {% for entry in craft.entries.section('news').relatedTo(tagId) %}
+                    <li class="posts__item">
+                        <h2 class="post__title"><a href="{{ entry.url }}">{{ entry.title }}</a></h2>
+                        <p>Posted on {{ entry.postDate.format('F d, Y') }}</p>
+                    </li>
+                {% endfor %}
+        {% endif %}
+        
+    </ul>
+
+{% endblock %}

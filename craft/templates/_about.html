@@ -1,0 +1,9 @@
+{% extends "_layout" %}
+
+{% block content %}
+<h1>About</h1>
+    <article>
+        <h3><a href="{{ entry.url }}">{{ entry.title }}</a></h3>
+        {{ entry.body.getPage(1) }}
+    </article>
+{% endblock %}

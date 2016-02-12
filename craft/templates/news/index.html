@@ -22,6 +22,12 @@
 			<p>Posted on {{ entry.postDate.format('F d, Y') }}</p>
 			{{ entry.body.getPage(1) }}
 			<p><a href="{{ entry.url }}">Continue reading</a></p>
+            <ul class="entry__tags">
+                {% set tags = entry.gameTags %}
+                {% for tag in tags %}
+                <li><a href="{{ url('news/tags/'~tag.id) }}">{{ tag.title }}</a></li>
+                {% endfor %}
+            </ul>
 		</article>
 	{% endfor %}
 {% endblock %}

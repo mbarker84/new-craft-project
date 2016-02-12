@@ -20,5 +20,11 @@
 		<h1>{{ entry.title }}</h1>
 		<p>Posted on {{ entry.postDate.format('F d, Y') }}</p>
 		{{ entry.body }}
+        <ul class="entry__tags">
+            {% set tags = entry.gameTags %}
+            {% for tag in tags %}
+                <li><a href="{{ url('news/tags/'~tag.id) }}">{{ tag.title }}</a></li>
+            {% endfor %}
+        </ul>
 	</article>
 {% endblock %}

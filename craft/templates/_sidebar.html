@@ -1,0 +1,16 @@
+<aside id="aside" class="sidebar">
+    {% block content %}
+    <ul class="sidebar__list">
+        {% for entry in craft.entries.section('recommends').limit(5).find() %}
+            <li class="sidebar__item">
+                <h3 class="sidebar__title"><a href="{{ entry.url }}">{{ entry.title }}</a></h3>
+                {% set image = entry.image.first() %}
+                {% if image %}
+                    <img src="{{ image.url }}" alt="" width="100%" height="auto">
+                {% endif %}
+                <p>{{ entry.body }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+    {% endblock %}
+</aside>

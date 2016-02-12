@@ -1,0 +1,10 @@
+{% extends "_layout" %}
+
+{% block content %}
+<h3>Testing tags</h3>
+	<ul class="list--tags-test">
+        {% for tag in craft.tags.group('gameTags') %}
+        <li><a href="{{ url('news/tags/'~tag.id) }}">{{ tag.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% endblock %}

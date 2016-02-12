@@ -24,7 +24,13 @@
         {% for entry in craft.entries.section('news').limit(5).find() %}
         <li class="posts__item">
             <h2 class="post__title"><a href="{{ entry.url }}">{{ entry.title }}</a></h2>
+            <p>Posted on {{ entry.postDate.format('F d, Y') }}</p>
             <p>{{ entry.body }}</p>
+            <p><a href="{{ entry.url }}">Continue reading</a></p>
+            {% set tags = entry.gameTags %}
+            {% for tag in tags %}
+                <li><a href="{{ url('news/tags/'~tag.id) }}">{{ tag.title }}</a></li>
+            {% endfor %}
         </li>
         {% endfor %}
     </ul>

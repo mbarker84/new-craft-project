@@ -3,7 +3,14 @@
         <li><a href="{{ url('news') }}" {% if craft.request.firstSegment == 'news' %}class="active"{% endif %}>News</a></li>
         <li><a href="{{ url('about') }}" {% if craft.request.firstSegment == 'about' %}class="active"{% endif %}>About</a></li>
     </ul>
+    <div class="header__social">
+        <a href="http://twitter.com/{{ twitter.body }}">@{{ twitter.body }}</a>
+    </div>
 </nav>
 <header id="header" class="site-header">
     <h1><a href="{{ siteUrl }}">{{ siteName }}</a></h1>
+    <form action="{{ url('search/results') }}">
+        <input type="search" name="q" placeholder="Search">
+        <input type="submit" value="Go">
+    </form>
 </header>
